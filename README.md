@@ -1,38 +1,30 @@
-# GeoFoto — sitio personal PHP
+# GeoFoto — portafolio geoespacial
 
-Portada personal para `geofoto.cl`, construida con PHP, CSS y JavaScript sin dependencias de compilación.
+Sitio personal de **Luis Bravo Galdames**, geógrafo. Reúne proyectos, líneas de exploración cartográfica, experimentos y fotografía territorial bajo la identidad GeoFoto.
 
-## Editar el contenido
+## Ver en línea
 
-Los datos principales, disciplinas y proyectos están al comienzo de `index.php`. Para habilitar un correo de contacto, completa el campo `email`; si queda vacío, el enlace no se muestra.
+[https://geofotodata.github.io/geofoto.cl/](https://geofotodata.github.io/geofoto.cl/)
+
+## Estructura
+
+- `index.html`: versión estática publicada gratuitamente con GitHub Pages.
+- `index.php`: compatibilidad opcional para un hosting PHP; sirve el mismo `index.html`.
+- `assets/style.css`: sistema visual y diseño adaptable.
+- `assets/app.js`: navegación, menú móvil y animaciones progresivas.
 
 ## Probar localmente
 
-Con PHP 8 o superior:
+No requiere instalación ni compilación. Abre `index.html` directamente o inicia un servidor local:
 
 ```bash
-cd geofoto-personal
-php -S localhost:8080
+python -m http.server 8080
 ```
 
-Luego abre `http://localhost:8080`.
+Luego visita `http://localhost:8080`.
 
-## Publicar en geofoto.cl
+## Publicar
 
-Sube el contenido de esta carpeta —no la carpeta contenedora— al directorio público del dominio, normalmente `public_html`, `www` o `htdocs`.
+GitHub Pages publica la rama principal del repositorio `geofotodata/geofoto.cl`. PHP no se ejecuta en GitHub Pages, pero no es necesario para ver el sitio.
 
-Estructura esperada:
-
-```text
-public_html/
-├── index.php
-├── .htaccess
-└── assets/
-    ├── app.js
-    ├── favicon.svg
-    └── style.css
-```
-
-Requiere PHP 8+ y funciona en Apache. En Nginx, `.htaccess` se ignora sin afectar la página.
-
-> GitHub puede guardar y versionar este proyecto, pero **GitHub Pages no ejecuta PHP**. Para usar `index.php`, publica estos archivos en el hosting PHP conectado a `geofoto.cl`.
+Para usar `geofoto.cl` como dominio propio se debe configurar el DNS del dominio y añadir un archivo `CNAME` cuando se conozca la configuración del proveedor.
