@@ -21,6 +21,12 @@ menuButton?.addEventListener('click', () => {
 });
 
 menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+});
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 680) closeMenu();
+}, { passive: true });
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
@@ -36,4 +42,24 @@ if ('IntersectionObserver' in window) {
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 } else {
     document.querySelectorAll('.reveal').forEach((element) => element.classList.add('is-visible'));
+}
+
+const navigationLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+const navigationSections = navigationLinks
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+if ('IntersectionObserver' in window && navigationSections.length) {
+    const navigationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navigationLinks.forEach((link) => {
+                const isCurrent = link.getAttribute('href') === `#${entry.target.id}`;
+                if (isCurrent) link.setAttribute('aria-current', 'true');
+                else link.removeAttribute('aria-current');
+            });
+        });
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+
+    navigationSections.forEach((section) => navigationObserver.observe(section));
 }
